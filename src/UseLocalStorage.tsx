@@ -30,16 +30,21 @@ import React from 'react';
 export function useLocalStorageState<V>(key: string, initialValue: V): [V, (newValue: V) => void] {
 
     // TODO: implement this code - this just returns 'any' which would not be usable.
+    const value = localStorage.getItem(key) || initialValue;
 
-    return [] as any;
+    function setValue(newValue: V) {
+        localStorage.setItem(key, JSON.stringify(newValue));
+    }
+
+    return [value, setValue] as [V, (newValue: V) => void];
 
 }
 
 export const RememberPassword = () => {
 
     // TODO: change this to use useLocalStorageState
-    const [value, setValue] = React.useState('off');
-    // const [value, setValue] = useLocalStorageState('remember-password', 'off');
+    // const [value, setValue] = React.useState('off');
+    const [value, setValue] = useLocalStorageState('remember-password', 'off');
 
     return (
         <input type="checkbox"

@@ -17,7 +17,7 @@ import React from 'react';
 export const App = () => {
 
     return (
-        <Main/>
+        <Main />
     );
 
 }
@@ -27,13 +27,17 @@ export type Theme = 'light' | 'dark';
 export type UseThemeToggler = (theme: Theme) => void;
 
 export type UseTheme = () => Theme;
+export const ThemeContext = React.createContext<Theme>("light");
+
 
 export const Main = () => {
 
     return (
-        <div>
-            <Settings/>
-        </div>
+        <ThemeContext.Provider value="light">
+            <div>
+                <Settings />
+            </div>
+        </ThemeContext.Provider>
     );
 
 }
